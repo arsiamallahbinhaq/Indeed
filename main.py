@@ -67,6 +67,7 @@ def get_all_items(query, location, start, page):
     job_list = []
     for item in contents:
         title = item.find('h2', 'jobTitle').text
+        title_rev = title.replace('Baru', '')
         company = item.find('span', 'companyName')
         comp_name = company.text
         try:
@@ -75,7 +76,7 @@ def get_all_items(query, location, start, page):
             comp_link = 'Link is not available'
         #sorting data
         data_dict = {
-            'title': title,
+            'title': title_rev,
             'company_name': comp_name,
             'company_link': comp_link
         }
@@ -134,9 +135,6 @@ def run():
 
         print('Data JSON Created')
         create_document(final_result, query)
-
-
-
 
 
 
